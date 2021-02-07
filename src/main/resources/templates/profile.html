@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="css/signin.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+<div class="container">
+    <h3 th:text='${#authentication.principal.fname+" "+#authentication.principal.lname}'/><br>
+    <a th:href="@{/user/password/change}"><button class="btn btn-primary">Change Password</button></a>
+    <a th:href="@{/user/card/add}"><button class="btn btn-primary">Add card</button></a>
+    <a th:href="@{/user/transfer}"><button class="btn btn-primary">Transfer Money</button></a>
+    <a th:href="@{/user/transfer/my}"><button class="btn btn-primary">Transfer Money to your cards</button></a>
+    <a th:href="@{/user/transfer/services}"><button class="btn btn-primary">Transfer Money to your cards</button></a>
+</div>
+<br>
+<br>
+<div class="container">
+    <div th:each="el:${cards}" class="container">
+        <hr>
+        <h3  th:text='${"Card: "+el.cardNumber}'/><br>
+        <h4 th:text='${"KZT: "+el.cash}'/><br>
+        <h4 th:text='${"USD: "+el.getDollars()}'/><br>
+        <h4 th:text='${"EUR: "+el.getEuro()}'/><br>
+        <a th:href='${"/user/card/"+el.id+"/add"}'><button class="btn btn-success">Add cash</button></a>
+        <a th:href='${"/user/card/"+el.id+"/history"}'><button class="btn btn-success">History</button></a>
+    </div>
+</div>
+<footer th:insert="blocks/footer::footer"></footer>
+</body>
+</html>

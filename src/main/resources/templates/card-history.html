@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="css/signin.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="container">
+
+    <div class="row">
+        <table class="table table-hover table-dark">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Transaction</th>
+                <th scope="col">Type</th>
+                <th scope="col">Sum</th>
+                <th scope="col">Commission</th>
+                <th scope="col">Outcome</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="el:${history}">
+                <th><a th:text="${el.id}" th:href="@{user/card/}+${el.id}+@{/history/}"/></th>
+                <td th:text="${el.transaction.name()}"/>
+                <td th:text="${el.paymentType.name()}"/>
+                <td th:text="${el.cash}"/>
+                <td th:text="${el.commission}"/>
+                <td th:text="${el.getOutcome()}"/>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<footer th:insert="blocks/footer::footer"></footer>
+</body>
+</html>
